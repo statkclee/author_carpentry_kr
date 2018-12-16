@@ -1,61 +1,19 @@
+README.html
+LAYOUT.html
+FAQ.html
+DESIGN.html
+CONTRIBUTING.html
+CONDUCT.html
 *~
-*#
-
-# mac things
+*.pyc
+_site
 .DS_Store
-*/.DS_Store
+.ipynb_*
+twitterOAuth.R
+.httr-oauth
+data/Kaggle_Training_Dataset_v2.csv
+data/Kaggle_Test_Dataset_v2.csv
+data/application_train.csv
+data/KaggleV2-May-2016.csv
+data/churn_network.xlsx
 
-# rstudio #
-###########
-.Rproj.user
-
-
-# Packages #
-############
-# it's better to unpack these files and commit the raw source
-# git has its own built in compression methods
-*.7z
-*.dmg
-*.gz
-*.iso
-*.jar
-*.rar
-*.tar
-*.zip
-
-# Logs and databases #
-######################
-*.log
-*.sql
-*.sqlite
-
-# vim swap files     #
-######################
-.*.swp
-
-# LaTeX #
-#########
-# Original from: https://gist.github.com/kogakure/149016
-*.aux
-*.glo
-*.idx
-*.log
-*.toc
-*.ist
-*.acn
-*.acr
-*.alg
-*.bbl
-*.blg
-*.dvi
-*.glg
-*.gls
-*.ilg
-*.ind
-*.lof
-*.lot
-*.maf
-*.mtc
-*.mtc1
-*.out
-*.synctex.gz
