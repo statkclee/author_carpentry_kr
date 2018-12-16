@@ -25,7 +25,17 @@ knitr::opts_chunk$set(echo = TRUE, warning=FALSE, message=FALSE,
 ```
 
 
-# 기본  [^rmarkdown-paper] [^author-carpentry] [^minial-make] {#basic-structure}
+# 자동화 툴체인 구축  [^rmarkdown-paper] [^author-carpentry] [^minial-make] {#basic-structure}
+
+[^rmarkdown-paper]: [Daijiang Li(2017/04/05), "Writing Academic Papers with Rmarkdown"](https://daijiang.name/en/2017/04/05/writing-academic-papers-with-rmarkdown/)
+
+[^author-carpentry]: [Gail Clement, Tom Morrell, "Reproducible Research Reporting with R and RStudio"](https://authorcarpentry.github.io/executable-documents-rstudio/)
+
+[^minial-make]: [Karl Broman, "minimal make A minimal tutorial on make"](http://kbroman.org/minimal_make/)
+
+[^swcarpentry-sheffield]: [Software Carpentry @ University of Sheffield](https://rgaiacs.gitlab.io/2018-11-07-intermediate-shell-sheffield/)
+
+## `make` 설치  {#basic-structure-make}
 
 윈도우 환경 make는 [Make for Windows](http://gnuwin32.sourceforge.net/packages/make.htm)에서 모든 것이 포함된
 `make-3.81.exe` 파일을 다운로드 받아 설치하면된다. 윈도우 환경에서 `make`를 실행할 경우 ...
@@ -48,12 +58,21 @@ knitr::opts_chunk$set(echo = TRUE, warning=FALSE, message=FALSE,
 # This program built for i386-pc-mingw32
 ```
 
+
+
 # 참고문헌 {#reference}
 
-[^rmarkdown-paper]: [Daijiang Li(2017/04/05), "Writing Academic Papers with Rmarkdown"](https://daijiang.name/en/2017/04/05/writing-academic-papers-with-rmarkdown/)
 
-[^author-carpentry]: [Gail Clement, Tom Morrell, "Reproducible Research Reporting with R and RStudio"](https://authorcarpentry.github.io/executable-documents-rstudio/)
+## $LaTeX$ 설치  {#basic-structure-latex}
 
-[^minial-make]: [Karl Broman, "minimal make A minimal tutorial on make"](http://kbroman.org/minimal_make/)
+윈도우 환경에서 한글이 지원되는 환경을 구축한다는 것은 영문으로 구현하는 것과 전혀 다른 얘기가 될 수 있다. 한글 윈도우 10 환경에서 한글 $LaTeX$ 환경설정에 대한 자세한 사항은 다음 링크를 참조한다.
 
-[^swcarpentry-sheffield]: [Software Carpentry @ University of Sheffield](https://rgaiacs.gitlab.io/2018-11-07-intermediate-shell-sheffield/)
+[데이터 과학: 저작(Authoring) - 한글 LaTeX 윈도우 설치](https://statkclee.github.io/ds-authoring/latex-install-windows.html)
+
+
+# $LaTeX$ 기반 논문작성  {#basic-structure-latex-make}
+
+가장 먼저 $LaTeX$ 기반 논문작성을 위해서 [Karl Broman, "minimal make A minimal tutorial on make"](http://kbroman.org/minimal_make/)을 참조하여 데이터 과학자에 적합한 형태로 변형을 시켜본다. 그리고 마크다운으로 확장하고, R 마크다운으로 확장하여 RStudio IDE에서 통합작업이 가능하게 작업한다. [^keran-healy-pandoc]
+
+[^keran-healy-pandoc]: [Kieran Healyn (2018-04-28), "The Plain Person's Guide to Plain Text Social Science"](http://plain-text.co/)
+
