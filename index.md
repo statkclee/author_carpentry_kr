@@ -11,6 +11,7 @@ title: "데이터 과학: 재현가능한 저작"
 - [재현가능한 논문 제작 환경](authoring-tools.html)
 - [R 마크다운 논문](rmarkdown-authoring.html)
 
+`pandoc` 버전: 1.19.2.
 
 
 ## [xwMOOC 오픈 교재](https://statkclee.github.io/xwMOOC/)
