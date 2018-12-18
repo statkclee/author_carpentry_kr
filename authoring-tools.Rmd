@@ -35,6 +35,8 @@ knitr::opts_chunk$set(echo = TRUE, warning=FALSE, message=FALSE,
 
 [^swcarpentry-sheffield]: [Software Carpentry @ University of Sheffield](https://rgaiacs.gitlab.io/2018-11-07-intermediate-shell-sheffield/)
 
+<img src="fig/markdown-pandoc-make.png" alt="pandoc markdown make 툴체인" width="100%" />
+
 ## `make` 설치  {#basic-structure-make}
 
 윈도우 환경 make는 [Make for Windows](http://gnuwin32.sourceforge.net/packages/make.htm)에서 모든 것이 포함된
@@ -58,11 +60,6 @@ knitr::opts_chunk$set(echo = TRUE, warning=FALSE, message=FALSE,
 # This program built for i386-pc-mingw32
 ```
 
-
-
-# 참고문헌 {#reference}
-
-
 ## $LaTeX$ 설치  {#basic-structure-latex}
 
 윈도우 환경에서 한글이 지원되는 환경을 구축한다는 것은 영문으로 구현하는 것과 전혀 다른 얘기가 될 수 있다. 한글 윈도우 10 환경에서 한글 $LaTeX$ 환경설정에 대한 자세한 사항은 다음 링크를 참조한다.
@@ -76,3 +73,35 @@ knitr::opts_chunk$set(echo = TRUE, warning=FALSE, message=FALSE,
 
 [^keran-healy-pandoc]: [Kieran Healyn (2018-04-28), "The Plain Person's Guide to Plain Text Social Science"](http://plain-text.co/)
 
+
+## pandoc 설치 [^pandoc-hello-world]  {#basic-structure-pandoc}
+
+[^pandoc-hello-world]: [Tutorial 17.3 - Markdown and Pandoc](http://www.flutterbys.com.au/stats/tut/tut17.3.html)
+
+[`pandoc`](https://pandoc.org)은 하스켈(haskell) 언어로 만들어진 문서 변환 프로그램으로 "Pandoc: a universal document converter"로 영미권에서 폭넓게 활용되고 있다.
+[Installing pandoc](https://pandoc.org/installing.html) 사이트에서 다운로드 받아 각 환경에 맞춰 설치작업을 수행하면 된다.
+
+`pandoc`은 마크다운 등을 입력으로 받아 이를 다양한 형태 문서로 변환시키는 도구다.
+
++---------------+---------------+--------------------+
+| 입력형식      |    &rarr;     |   출력형식         |
++===============+===============+====================+
+| - 마크다운          |                 |
+| - HTML              | - plain text    |
+| - LaTeX             | - markdown    |
+| - Textile           | - HTML (XHTML, HTML5>)    |
+| - reStructuredText  | - LaTeX    |
+| - MediaWiki markup  | - PDF (when LaTeX installed)    |
+| - DocBook XML       | - Various HTML/Javascrip based slide shows (Slidy, Slideous, DZSlides, S5)    |
+|                     | - EPUB    |
+|                     | - Emacs org-mode    |
+|                     | - Rich Text Format (RTF)    |
+|                     | - OpenDocument XML    |
+|                     | - LibreOffice (Open Document Format, ODT)    |
+|                     | - Microsoft Word DOCX    |
+|                     | - MediaWiki markup    |
+|                     | - FictionBook2    |
+|                     | - Textile    |
+|                     | - groff man pages    |
+|                     | - AsciiDoc    |
++---------------+---------------+--------------------+
