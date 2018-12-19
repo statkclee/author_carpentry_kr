@@ -108,7 +108,9 @@ There is no warranty, not even for merchantability or fitness
 for a particular purpose.
 ```
 
-# `pandoc` 기반 문서작성 [^pandoc-hello-world] {#basic-structure-pandoc-hello-world}
+# 헬로월드 {#document-hello-world}
+
+## `pandoc` 기반 문서작성 [^pandoc-hello-world] {#basic-structure-pandoc-hello-world}
 
 [^pandoc-hello-world]: [Tutorial 17.3 - Markdown and Pandoc](http://www.flutterbys.com.au/stats/tut/tut17.3.html)
 
@@ -193,10 +195,195 @@ div.blue { background-color:#e6f0ff; border-radius: 5px; padding: 10px;}
 </div>
 
 
-# $LaTeX$ 기반 논문작성  {#basic-structure-latex-make}
+## $LaTeX$ 기반 논문작성  {#basic-structure-latex-make}
 
-가장 먼저 $LaTeX$ 기반 논문작성을 위해서 [Karl Broman, "minimal make A minimal tutorial on make"](http://kbroman.org/minimal_make/)을 참조하여 데이터 과학자에 적합한 형태로 변형을 시켜본다. 그리고 마크다운으로 확장하고, R 마크다운으로 확장하여 RStudio IDE에서 통합작업이 가능하게 작업한다. [^keran-healy-pandoc]
+가장 먼저 $LaTeX$ 기반 논문작성을 위해서 [Karl Broman, "minimal make A minimal tutorial on make"](http://kbroman.org/minimal_make/)을 참조하여 데이터 과학자에 적합한 형태로 변형을 시켜본다. 
+그리고 마크다운으로 확장하고, R 마크다운으로 확장하여 RStudio IDE에서 통합작업이 가능하게 작업한다. [^keran-healy-pandoc]
 
 [^keran-healy-pandoc]: [Kieran Healyn (2018-04-28), "The Plain Person's Guide to Plain Text Social Science"](http://plain-text.co/)
 
+### $LaTeX$ 헬로 월드  {#basic-structure-latex-hello-world}
 
+먼저 $LaTeX$ 기반 텍(Tex)문서로 `.tex` 확장자를 갖는 파일을 작성한다.
+범용 텍스트 편집기를 사용해도 되고 $LaTeX$전용 편집기 [TexWorks](https://github.com/TeXworks/texworks/releases)를 본인 운영체제에 맞춰
+설치하여 사용해도 된다.
+$LaTeX$을 사용하게 되면 아래한글, 워드와 비교하여 다른 문서편집기와 비교하여 복잡하고 유지보수가 필요한 문서작업 예를 들어 논문작성 등에 
+강점이 있다. 한글로 문서를 작성하는 경우 추가적으로 `oblivoir`와 같은 `\documentclass` 혹은 
+`\documentclass`로 `article`을 지정하고 `\usepackage{kotex}`를 조합하여 사용한다. 
+이유는 `oblivoir`는 한글지원이 내장되어 있다고 보면 쉽다.
+
+<img src="fig/latex-output.png" alt="Latex 출력물" width="100%" />
+
+작업과정은 $LaTeX$ 기반 텍(Tex)문서 `.tex` 확장자를 갖는 문서를 작성하고 나서 [TeX Users Group 웹사이트](https://www.tug.org/)에서 
+[TeX Live](https://www.tug.org/texlive/)와 같은 $LaTeX$ 문서 변환 엔진을 사용해서 `.pdf` 파일을 다양한 형태 즉, 책/보고서/슬라이드쇼 등 뽑아낸다.
+
+
+```{latex latex-compose, eval=FALSE}
+% hello_world.tex 파일명
+% \documentclass[12pt]{article}
+
+\documentclass[12pt]{oblivoir}
+\usepackage{kotex}
+\usepackage{graphicx}
+\setlength{\parskip}{6pt}   % 단락사이 빈여백 공간설정.
+\setlength{\parindent}{0pt} % 단락사이 들여쓰기 않함.
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+
+\begin{document}
+
+\textbf{GUI와 CLI 전쟁}
+
+\bigskip
+
+매우 단순한 \LaTeX\/ 문서로 \LaTeX\/을 사용하여 문서를 작성합니다.
+
+Hello world!
+안녕하세요. 안녕하세요. 
+$x^2 + y^2 = z^2 $ %수학 모드
+
+\begin{itemize}
+  \item 한글 사용이 가능한지 확인합니다.
+  \item 수식 사용이 가능한지 확인합니다.
+  \item 표 사용이 가능한지 확인합니다.
+  \item 그림 사용이 가능한지 확인합니다.
+  \item 참고문헌 사용이 가능한지 확인합니다.
+\end{itemize}
+
+\section{수식}
+
+\section{표}
+
+\section{그림}
+
+\section{참고문헌}
+
+\end{document}
+```
+
+[TexWorks](https://github.com/TeXworks/texworks/releases) 편집기를 [TeXLive 2018](http://wiki.ktug.org/wiki/wiki.php/%EC%84%A4%EC%B9%98%ED%95%98%EA%B8%B0Windows/tlinstall)을 엔진으로 
+삼아 상기 `hello_world.tex` 파일명으로 작성하여 컴파일시키면 `.pdf` 문서를 생성시킨다.
+
+<img src="fig/latex-preview.png" alt="LaTeX 문서변환" width="100%" />
+
+
+### 최소 $LaTeX$ 논문작성  {#basic-structure-latex-paper}
+
+[TexWorks](https://github.com/TeXworks/texworks/releases) 편집기 대신 데이터 과학을 염두에 두고 RStudio IDE를 $LaTeX$ 편집기로 사용한다.
+동일하게 `.tex` 파일을 작성하는데 이번에는 논문 작성에 기본으로 들어가는 요소들을 하나씩 배치시킨다.
+
+- 한글 사용이 가능한지 확인합니다.
+- 수식 사용이 가능한지 확인합니다.
+- 표 사용이 가능한지 확인합니다.
+- 그림 사용이 가능한지 확인합니다.
+- 참고문헌 사용이 가능한지 확인합니다.
+
+상기 작업을 위해서 다음과 같이 작업 환경을 구축한다.
+
+`minimal_latex.tex` 파일로 논문이나 보고서 내용을 작성하고 관련된 이미지 파일을 `fig` 디렉토리 아래 위치시킨다.
+참고문헌을 `papers.bib` 파일에 정리하여 보고서와 논문이 작성될 때 자동 생성시킨다.
+
+```{r latex-directory-structure, eval=FALSE}
+LaTex프로젝트/
+|-- fig/
+|   |-- suji.jpg
+| minimal_latex.tex
+| papers.bib
+```
+
+`minimal_latex.tex` 파일에 논문과 보고서 내용을 각 장별로 나눠 작성한다.
+문서에는 한글, 수식, 표, 그림 삽입, 참고문헌 사용이 망라되어 있다.
+
+```{latex latex-minimal-latex, eval=FALSE}
+% minimal_latex.tex 파일명
+\documentclass[12pt]{article}
+\usepackage{kotex}
+\usepackage{graphicx}
+\setlength{\parskip}{6pt}   % 단락사이 빈여백 공간설정.
+\setlength{\parindent}{0pt} % 단락사이 들여쓰기 않함.
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{hyperref}
+
+\begin{document}
+
+\section{$LaTeX$ 최소 사용법}
+
+매우 단순한 \LaTeX\/ 문서로 \LaTeX\/을 사용하여 문서를 작성합니다.
+
+\begin{itemize}
+  \item 한글 사용이 가능한지 확인합니다.
+  \item 수식 사용이 가능한지 확인합니다.
+  \item 표 사용이 가능한지 확인합니다.
+  \item 그림 사용이 가능한지 확인합니다.
+  \item 참고문헌 사용이 가능한지 확인합니다.
+\end{itemize}
+
+출처: \href{https://en.wikibooks.org/wiki/LaTeX}{위키 책(Book)}
+
+\section{수식}
+
+$x^2 + y^2 = z^2 $ %수학 모드
+
+\section{표}
+
+\begin{center}
+  \begin{tabular}{ l | c | r }
+    \hline
+    1 & 2 & 3 \\ \hline
+    4 & 5 & 6 \\ \hline
+    7 & 8 & 9 \\
+    \hline
+  \end{tabular}
+\end{center}
+
+\begin{tabular}{ | l | l | r | }
+  \hline\noalign{\smallskip}
+  \multicolumn{2}{c}{Item} \\
+  \cline{1-2}\noalign{\smallskip}
+  Animal & Description & Price (\$) \\
+  \noalign{\smallskip}\hline\noalign{\smallskip}
+  Gnat  & per gram & 13.65 \\
+        & each     &  0.01 \\
+  Gnu   & stuffed  & 92.50 \\
+  Emu   & stuffed  & 33.33 \\
+  Armadillo & frozen & 8.99 \\
+  \noalign{\smallskip}\hline
+\end{tabular}
+
+\section{그림}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=2cm]{fig/suji.jpg}
+    \caption{수지 리즈시절 사진}
+    \label{fig:label}
+\end{figure}
+
+\section{참고문헌}
+
+상기 수지 사진을 제작하기 위해 사용된 자세한 방법은 \cite{Kopka2003}을 참조한다.
+
+% 참고문헌 삽입
+\bibliography{papers}{}
+\bibliographystyle{plain}
+
+\end{document}
+```
+
+참고문헌을 담고 있는 `papers.bib` 파일에는 `minimal_latex.tex` 파일에서 참고하고 있는 유일한 문서
+`Kopka2003` 책에 대한 정보가 담겨있다.
+
+```{r latex-bibiliography, eval=FALSE}
+@book{Kopka2003,
+author = {Helmut Kopka and Patrick W. Daly},
+year = {2003},
+title = {Guide to {LaTeX}},
+edition = {4th edition},
+publisher = {Addison-Wesley}
+}
+```
+
+위와 같이 수지 레전드 리즈시절 이미지, 참고문헌을 준비하고 RStudio에서 컴파일시키면 다음과 같이 `.pdf` 파일이 자동 생성된다.
+
+<img src="fig/latex-rstudio.png" alt="RStudio 최소 LaTeX" width="100%" />

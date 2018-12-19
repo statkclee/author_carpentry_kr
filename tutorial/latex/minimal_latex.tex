@@ -1,0 +1,75 @@
+% minimal_latex.tex 파일명
+\documentclass[12pt]{article}
+\usepackage{kotex}
+\usepackage{graphicx}
+\setlength{\parskip}{6pt}   % 단락사이 빈여백 공간설정.
+\setlength{\parindent}{0pt} % 단락사이 들여쓰기 않함.
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{hyperref}
+
+\begin{document}
+
+\section{$LaTeX$ 최소 사용법}
+
+매우 단순한 \LaTeX\/ 문서로 \LaTeX\/을 사용하여 문서를 작성합니다.
+
+\begin{itemize}
+  \item 한글 사용이 가능한지 확인합니다.
+  \item 수식 사용이 가능한지 확인합니다.
+  \item 표 사용이 가능한지 확인합니다.
+  \item 그림 사용이 가능한지 확인합니다.
+  \item 참고문헌 사용이 가능한지 확인합니다.
+\end{itemize}
+
+출처: \href{https://en.wikibooks.org/wiki/LaTeX}{위키 책(Book)}
+
+\section{수식}
+
+$x^2 + y^2 = z^2 $ %수학 모드
+
+\section{표}
+
+\begin{center}
+  \begin{tabular}{ l | c | r }
+    \hline
+    1 & 2 & 3 \\ \hline
+    4 & 5 & 6 \\ \hline
+    7 & 8 & 9 \\
+    \hline
+  \end{tabular}
+\end{center}
+
+\begin{tabular}{ | l | l | r | }
+  \hline\noalign{\smallskip}
+  \multicolumn{2}{c}{Item} \\
+  \cline{1-2}\noalign{\smallskip}
+  Animal & Description & Price (\$) \\
+  \noalign{\smallskip}\hline\noalign{\smallskip}
+  Gnat  & per gram & 13.65 \\
+        & each     &  0.01 \\
+  Gnu   & stuffed  & 92.50 \\
+  Emu   & stuffed  & 33.33 \\
+  Armadillo & frozen & 8.99 \\
+  \noalign{\smallskip}\hline
+\end{tabular}
+
+\section{그림}
+
+\begin{figure}
+	\centering
+	\includegraphics[width=2cm]{fig/suji.jpg}
+	\caption{수지 리즈시절 사진}
+	\label{fig:label}
+\end{figure}
+
+\section{참고문헌}
+
+상기 수지 사진을 제작하기 위해 사용된 자세한 방법은 \cite{Kopka2003}을 참조한다.
+
+% 참고문헌 삽입
+\bibliography{papers}{}
+\bibliographystyle{plain}
+
+
+\end{document}
