@@ -387,3 +387,7 @@ publisher = {Addison-Wesley}
 위와 같이 수지 레전드 리즈시절 이미지, 참고문헌을 준비하고 RStudio에서 컴파일시키면 다음과 같이 `.pdf` 파일이 자동 생성된다.
 
 <img src="fig/latex-rstudio.png" alt="RStudio 최소 LaTeX" width="100%" />
+
+# 마무리 {#document-outro}
+
+이상으로 마크다운과 $LaTeX$을 중심으로 다양한 문서를 자동생성하는 방식을 살펴봤다. 이런 작업흐름을 갖는 경우와 비교하여 데이터를 중심으로 데이터 분석결과를 담아내는 문서를 생성시킬 경우 불편한 점이 다수 생기게 된다. 이러한 한계를 극복하는 전략으로 RStudio에서 `.Rmd` 파일을 생성시켜 작업을 추진하는 방법과 `make`를 활용하여 `Makefile`에 문서 생성 자동화과정을 담아내는 것을 살펴보자.
