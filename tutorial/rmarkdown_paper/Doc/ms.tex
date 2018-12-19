@@ -1,5 +1,7 @@
 \documentclass[12pt,]{article}
 \usepackage{lmodern}
+\usepackage{setspace}
+\setstretch{1.5}
 \usepackage{amssymb,amsmath}
 \usepackage{ifxetex,ifluatex}
 \usepackage{fixltx2e} % provides \textsubscript
@@ -74,15 +76,16 @@
 }
 
 \setlength{\droptitle}{-2em}
+
   \title{Your Awesome Title}
-  \pretitle{\vspace{\droptitle}\centering\huge}
+    \pretitle{\vspace{\droptitle}\centering\huge}
   \posttitle{\par}
-  \author{Author One and Author Two}
-  \preauthor{\centering\large\emph}
+    \author{Author One and Author Two}
+    \preauthor{\centering\large\emph}
   \postauthor{\par}
-  \predate{\centering\large\emph}
+      \predate{\centering\large\emph}
   \postdate{\par}
-  \date{2017-04-26 11:44:43}
+    \date{2018-12-19 17:58:02}
 
 \usepackage{geometry}
 \geometry{verbose,letterpaper,margin=2.45cm}
@@ -124,6 +127,10 @@
   \let\\\@centercr\@rightskip\@flushglue \rightskip\@rightskip
   \leftskip\z@skip}
 \makeatother
+
+% make pdf as default figure format
+\DeclareGraphicsExtensions{.pdf,.png, %
+    .jpg,.mps,.jpeg,.jbig2,.jb2,.JPG,.JPEG,.JBIG2,.JB2}
 
 \begin{document}
 \maketitle
@@ -241,7 +248,7 @@ Or if you already have the figure: And cite it as Figure \ref{fig:fig2}.
 
 \begin{figure}
 
-{\centering \includegraphics[width=0.7\linewidth]{/Users/dli/Github/workflow_demo/Figs/plot} 
+{\centering \includegraphics[width=0.7\linewidth]{/Users/statkclee/swc/author_carpentry_kr/tutorial/rmarkdown_paper/Figs/plot} 
 
 }
 
@@ -256,23 +263,24 @@ More details can be found at
 
 \hypertarget{refs}{}
 \hypertarget{ref-adair_single-pool_2010}{}
-Adair, E. C. et al. 2010. Single-pool exponential decomposition models:
-Potential pitfalls in their use in ecological studies. - Ecology 91:
-1225--1236.
+Adair, E. C., S. E. Hobbie, and R. K. Hobbie. 2010. Single-pool
+exponential decomposition models: Potential pitfalls in their use in
+ecological studies. Ecology 91:1225--1236.
 
 \hypertarget{ref-clark_loss_2008}{}
-Clark, C. M. and Tilman, D. 2008. Loss of plant species after chronic
-low-level nitrogen deposition to prairie grasslands. - Nature 451:
-712--715.
+Clark, C. M., and D. Tilman. 2008. Loss of plant species after chronic
+low-level nitrogen deposition to prairie grasslands. Nature
+451:712--715.
 
 \hypertarget{ref-eriksson_seed_1993}{}
-Eriksson, O. and Ehrlén, J. 1993. Seed and microsite limitation of
-recruitment in plant populations. - Oecologia 92: 361--366.
+Eriksson, O., and J. Ehrlén. 1993. Seed and microsite limitation of
+recruitment in plant populations. Oecologia 92:361--366.
 
 \hypertarget{ref-williamson_dissolved_1999}{}
-Williamson, C. E. et al. 1999. Dissolved organic carbon and nutrients as
-regulators of lake ecosystems: Resurrection of a more integrated
-paradigm. - Limnology and Oceanography 44: 795--803.
+Williamson, C. E., D. P. Morris, M. L. Pace, and O. G. Olson. 1999.
+Dissolved organic carbon and nutrients as regulators of lake ecosystems:
+Resurrection of a more integrated paradigm. Limnology and Oceanography
+44:795--803.
 
 
 \end{document}
