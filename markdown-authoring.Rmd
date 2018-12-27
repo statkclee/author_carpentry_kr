@@ -25,14 +25,6 @@ knitr::opts_chunk$set(echo = TRUE, warning=FALSE, message=FALSE,
 ```
 
 
-# 기본구조  [^rmarkdown-paper] {#basic-structure}
-
-
-# 참고문헌 {#reference}
-
-[^rmarkdown-paper]: [Daijiang Li(2017/04/05), "Writing Academic Papers with Rmarkdown"](https://daijiang.name/en/2017/04/05/writing-academic-papers-with-rmarkdown/)
-
-
 # 마크다운 &rarr; $LaTeX$ 논문작성 [^latex-bib-pdf] {#latex-paper}
 
 [^latex-bib-pdf]: [How to make a scientific looking PDF from markdown (with bibliography)](https://gist.github.com/maxogden/97190db73ac19fc6c1d9beee1a6e4fc8)
@@ -47,14 +39,14 @@ BibTeX 프로그램(bibtex)은 참고문헌 데이터베이스(.bib 파일)에�
 
 <img src="fig/pandoc-latex-bibtex.png" alt="마크다운 bibTeX 논문작성" width="100%" />
 
-## 논문제작 도구 설치 {#latex-paper-toolchain}
+# 논문제작 도구 설치 {#latex-paper-toolchain}
 
 `$LaTeX$`이 설치되어 있다는 가정하에 추가로 설치해야 되는 도구는 `pandoc`, `pandoc-citeproc`이다.
 
 맥에서는 `brew install pandoc pandoc-citeproc` 명령어로 설치하면 되고 윈도우에서는 `pandoc`을 설치하면 포함되어 자동 설치되는 것으로 알려져 있다.
 RStudio에도 `pandoc`이 내장되어 있고, `C:\Program Files\RStudio\bin\pandoc` 디렉토리에 `pandoc.exe`, `pandoc-citeproc.exe` 파일이 모두 내장되어 있다.
 
-## 작업흐름(workflow) {#latex-paper-toolchain}
+# 작업흐름(workflow) {#latex-paper-toolchain}
 
 도구가 설치되면 공장으로 치면 설비가 깔린 것과 다름없다.
 그 다음 단계로 논문 제작 공장 설비에 마크다운 문서를 올리면 최종 산출물로 PDF 파일 제품이 나오는 것과 유사하다.
@@ -63,7 +55,7 @@ RStudio에도 `pandoc`이 내장되어 있고, `C:\Program Files\RStudio\bin\pan
 
 마크다운 &rarr; $LateX$ &rarr; $LateX$ Citeproc Bibliography Filter &rarr; PDF
 
-## 논문제작 환경 {#latex-paper-project}
+# 논문제작 환경 {#latex-paper-project}
 
 마크다운으로 `data_science.md` 파일을 작성한다. 그리고 나서 참고문헌은 `data_science.bib` 파일에 작성한다.
 이미지는 `fig` 디렉토리 아래 모아둔다. 이를 `pandoc` 프로그램을 실행시켜 `pdf` 파일을 생성시킨다.
@@ -176,7 +168,7 @@ RStudio에도 `pandoc`이 내장되어 있고, `C:\Program Files\RStudio\bin\pan
 </div>
 
 
-## 논문 생산 {#latex-paper-production}
+# 논문 생산 {#latex-paper-production}
 
 논문 생산을 위한 모든 준비가 완료되었기 때문에 다음 단계로 마크다운 문서와 참고문헌을 넣고 한글이 깨지지 않도록 $LaTeX$ 엔진 설정을 바꿔서 넣게 되면 
 PDF 논문이 생산된다.
