@@ -9,6 +9,7 @@ title: "데이터 과학: 재현가능한 저작"
 재현가능한 저작(논문 포함)을 위해서 기본기에 대한 교재입니다.
 
 - [재현가능한 논문 제작 환경](authoring-tools.html)
+- [마크다운 논문](rmarkdown-authoring.html)
 - [R 마크다운 논문](rmarkdown-authoring.html) - 작업중
 - [디지털 객체 식별자(DOI, Digital Object Identifiers)](authoring-doi.html)
 
