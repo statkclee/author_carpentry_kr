@@ -56,9 +56,9 @@ CLI 종족은 과거 소수였지만, 소프트웨어 카펜트리[@DBLP:journal
 
 ## 종족전쟁 도해
 
-GUI 종족과 CLI 종종간의 종족전쟁은 \@ref(fig:superman_batman)에 잘 나와 있다.
+GUI 종족과 CLI 종종간의 종족전쟁은 \@ref(fig:supermanBatman)에 잘 나와 있다.
 
-```{r superman_batman, out.width='70%', fig.cap="Caption here."}
+```{r supermanBatman, out.width='70%', fig.cap="Caption here."}
 knitr::include_graphics(path = paste0(normalizePath(getwd()), "/fig/gui-vs-cli.jpg"))
 ```
 
@@ -111,9 +111,9 @@ $\eta^3$          0.15        0.31                    0.52
 
 # R 그래프 
 
-그래프 참조를 하는 방법 \@ref(fig:fig_name).
+그래프 참조를 하는 방법 \@ref(fig:figName).
 
-```{r fig_name, fig.width=7, fig.asp=1, fig.cap="Your caption here."}
+```{r figName, fig.width=7, fig.asp=1, fig.cap="Your caption here."}
 ggplot(data = envi.sprich, aes(x = value, y = sprich)) +
   geom_point() + geom_smooth(method = "lm") +
   facet_wrap(~envi, scales = "free_x") + theme_bw()
@@ -150,12 +150,13 @@ mtcars_reg %>% broom::tidy()
 
 ## 시각화 
 
-```{r sample-viz}
+```{r mtcarsGraph, fig.width=7, fig.asp=1, fig.cap="Mtcars 그래프"}
 mtcars %>% 
   mutate(vs = as.factor(vs)) %>% 
   ggplot(aes(x=disp, y=mpg, color=vs)) +
     geom_point() +
-    geom_abline(intercept = coef(mtcars_reg)[1], slope= coef(mtcars_reg)[2])
+    geom_smooth(method = "lm") +
+    theme_minimal()
 ```
 
 ## 첨부: `pandoc` 컴파일 코드

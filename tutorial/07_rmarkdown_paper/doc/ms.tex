@@ -15,6 +15,7 @@
     \usepackage{fontspec}
   \fi
   \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+    \setmainfont[]{NanumGothic}
 \fi
 % use upquote if available, for straight quotes in verbatim environments
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
@@ -27,7 +28,7 @@
 \usepackage{hyperref}
 \hypersetup{unicode=true,
             pdftitle={한글 논문},
-            pdfauthor={Author One and Author Two},
+            pdfauthor={이정훈, 권기민},
             pdfborder={0 0 0},
             breaklinks=true}
 \urlstyle{same}  % don't use monospace font for urls
@@ -80,46 +81,117 @@
   \title{한글 논문}
     \pretitle{\vspace{\droptitle}\centering\huge}
   \posttitle{\par}
-    \author{Author One and Author Two}
+    \author{이정훈, 권기민}
     \preauthor{\centering\large\emph}
   \postauthor{\par}
       \predate{\centering\large\emph}
   \postdate{\par}
-    \date{2018-12-31 13:55:41}
+    \date{2018-12-31 15:40:46}
 
-\usepackage{geometry}
-\geometry{verbose,letterpaper,margin=2.45cm}
+% rstudio/bookdown preamble.tex
+% https://github.com/rstudio/bookdown/blob/master/inst/examples/latex/preamble.tex
 
-% \usepackage[breaklinks=true,pdfstartview=FitH,citecolor=blue]{hyperref}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage[bf,singlelinecheck=off]{caption}
 
-%\documentclass{oblivoir}
-%\usepackage{fontspec}
-%\usepackage{unicode-math}
-\usepackage{kotex}
-%\usepackage[T1]{fontenc}
-%\usepackage[utf8]{inputenc}
-% \usepackage{textgreek}
-% \usepackage[greek,english]{babel}
-%\usepackage{microtype}
-% \usepackage{amsmath}
-% \usepackage[osf]{libertine}
-% \usepackage{libertinust1math}
-%\usepackage{amsmath}
-%\usepackage{mathspec}
+% \setmainfont[UprightFeatures={SmallCapsFont=AlegreyaSC-Regular}]{Alegreya}
 
-%\usepackage{inconsolata}
+\usepackage{framed,color}
+\definecolor{shadecolor}{RGB}{248,248,248}
 
-%\usepackage{booktabs}
+\renewcommand{\textfraction}{0.05}
+\renewcommand{\topfraction}{0.8}
+\renewcommand{\bottomfraction}{0.8}
+\renewcommand{\floatpagefraction}{0.75}
 
-\usepackage{setspace}
-\doublespacing
+\renewenvironment{quote}{\begin{VF}}{\end{VF}}
+\let\oldhref\href
+\renewcommand{\href}[2]{#2\footnote{\url{#1}}}
 
-% \setstretch{1.8999999999999999}
+\ifxetex
+  \usepackage{letltxmacro}
+  \setlength{\XeTeXLinkMargin}{1pt}
+  \LetLtxMacro\SavedIncludeGraphics\includegraphics
+  \def\includegraphics#1#{% #1 catches optional stuff (star/opt. arg.)
+    \IncludeGraphicsAux{#1}%
+  }%
+  \newcommand*{\IncludeGraphicsAux}[2]{%
+    \XeTeXLinkBox{%
+      \SavedIncludeGraphics#1{#2}%
+    }%
+  }%
+\fi
 
-\usepackage{lineno}
-\linenumbers
+\makeatletter
+\newenvironment{kframe}{%
+\medskip{}
+\setlength{\fboxsep}{.8em}
+ \def\at@end@of@kframe{}%
+ \ifinner\ifhmode%
+  \def\at@end@of@kframe{\end{minipage}}%
+  \begin{minipage}{\columnwidth}%
+ \fi\fi%
+ \def\FrameCommand##1{\hskip\@totalleftmargin \hskip-\fboxsep
+ \colorbox{shadecolor}{##1}\hskip-\fboxsep
+     % There is no \\@totalrightmargin, so:
+     \hskip-\linewidth \hskip-\@totalleftmargin \hskip\columnwidth}%
+ \MakeFramed {\advance\hsize-\width
+   \@totalleftmargin\z@ \linewidth\hsize
+   \@setminipage}}%
+ {\par\unskip\endMakeFramed%
+ \at@end@of@kframe}
+\makeatother
 
-% \renewcommand{\rmdefault}{cmr}
+\makeatletter
+\@ifundefined{Shaded}{
+}{\renewenvironment{Shaded}{\begin{kframe}}{\end{kframe}}}
+\makeatother
+
+\newenvironment{rmdblock}[1]
+  {
+  \begin{itemize}
+  \renewcommand{\labelitemi}{
+    \raisebox{-.7\height}[0pt][0pt]{
+      {\setkeys{Gin}{width=3em,keepaspectratio}\includegraphics{images/#1}}
+    }
+  }
+  \setlength{\fboxsep}{1em}
+  \begin{kframe}
+  \item
+  }
+  {
+  \end{kframe}
+  \end{itemize}
+  }
+\newenvironment{rmdnote}
+  {\begin{rmdblock}{note}}
+  {\end{rmdblock}}
+\newenvironment{rmdcaution}
+  {\begin{rmdblock}{caution}}
+  {\end{rmdblock}}
+\newenvironment{rmdimportant}
+  {\begin{rmdblock}{important}}
+  {\end{rmdblock}}
+\newenvironment{rmdtip}
+  {\begin{rmdblock}{tip}}
+  {\end{rmdblock}}
+\newenvironment{rmdwarning}
+  {\begin{rmdblock}{warning}}
+  {\end{rmdblock}}
+
+\usepackage{makeidx}
+\makeindex
+
+\urlstyle{tt}
+
+\usepackage{amsthm}
+\makeatletter
+\def\thm@space@setup{%
+  \thm@preskip=8pt plus 2pt minus 4pt
+  \thm@postskip=\thm@preskip
+}
+\makeatother
 
 % flush left while keep identation
 \makeatletter
@@ -128,9 +200,7 @@
   \leftskip\z@skip}
 \makeatother
 
-% make pdf as default figure format
-\DeclareGraphicsExtensions{.pdf,.png, %
-    .jpg,.mps,.jpeg,.jbig2,.jb2,.JPG,.JPEG,.JBIG2,.JB2}
+% \frontmatter
 
 \begin{document}
 \maketitle
@@ -140,46 +210,45 @@
 
 \textbf{Running headline}: Environment and species richness
 
-\textbf{Abstract}: Your awesome abstract here.
+\textbf{초록}: GUI 종족과 CLI 종족간의 전쟁은 끝이 보이지 않고 있다. 두
+종족간의 전쟁은 윈도우의 출현으로 GUI 종족의 일방적인 승리로 끝날 것으로
+보였지만, 클라우드 시대의 출현으로 다시 CLI 종족이 주도권을 잡아가고
+있는 모양이 되었다. CLI 종족은 과거 소수였지만, 소프트웨어
+카펜트리{[}Simperler and Wilson
+\protect\hyperlink{ref-DBLP:journalsux2fcorrux2fSimperlerW15}{2015}{]}를
+내세워서 GUI 종족을 흡수하면서 세력을 급격히 확장시키고 있다.
+
+두 종족간의 전쟁은 어떻게 전개될까? 과연 과학 컴퓨팅{[}Wilson
+\protect\hyperlink{ref-10.1371ux2fjournal.pbio.1001745}{2014}{]}는
+도움이 될까?
 
 \clearpage
 
-\hypertarget{introduction}{%
-\section{Introduction}\label{introduction}}
+\subsection{종족전쟁 도해}\label{-}
 
-Here is your introduction. It should describe clearly the rationale for
-the study being done and the previous work related with the study. It
-should also tell readers about your specific hypothese/questions being
-addressed. Citations will be like this (Adair et al.
-\protect\hyperlink{ref-adair_single-pool_2010}{2010}), or (e.g., Clark
-and Tilman \protect\hyperlink{ref-clark_loss_2008}{2008}), or (Eriksson
-and Ehrlén \protect\hyperlink{ref-eriksson_seed_1993}{1993}, Williamson
-et al. \protect\hyperlink{ref-williamson_dissolved_1999}{1999})
+GUI 종족과 CLI 종종간의 종족전쟁은 \ref{fig:supermanBatman}에 잘 나와
+있다.
 
-Here is the second paragraph of the introduction.
+\begin{figure}
 
-\hypertarget{methods}{%
-\section{Methods}\label{methods}}
+{\centering \includegraphics[width=0.7\linewidth]{/Users/statkclee/swc/author_carpentry_kr/tutorial/07_rmarkdown_paper/fig/gui-vs-cli} 
 
-Here is the method section. You can include equations easily. For inline
-equations, use \(\text{var}(X) = p(1-p)\). For display equation, use
+}
 
-\[\text{var}(X) = p(1-p)\]
+\caption{Caption here.}\label{fig:supermanBatman}
+\end{figure}
 
-\hypertarget{results}{%
-\subsection{Results}\label{results}}
+\subsection{수식}
 
-\hypertarget{tables}{%
-\paragraph{Tables}\label{tables}}
+\[\text{생산성} = \frac{\text{CLI}^2}{\text{GUI}}\]
 
-Insert tables by \texttt{kable} in knitr package in R. Then
-cross-reference it back with: see Table \ref{tab:tableName}.
+\subsection{표}
 
-\begin{table}[t]
+\begin{table}
 
 \caption{\label{tab:tableName}Caption here.}
 \centering
-\begin{tabular}{rr}
+\begin{tabular}[t]{rr}
 \toprule
 Plot & sprich\\
 \midrule
@@ -191,13 +260,9 @@ Plot & sprich\\
 \end{tabular}
 \end{table}
 
-Put results inline, e.g.~the mean species richness is 28.
+종족 평균값은 28.
 
-\hypertarget{insert-tables-by-xtable-package-in-r}{%
-\paragraph{\texorpdfstring{Insert tables by \texttt{xtable} package in
-R}{Insert tables by xtable package in R}}\label{insert-tables-by-xtable-package-in-r}}
-
-Show as Table. \ref{t:anova}:
+표 참조를 넣은 경우 \ref{t:anova}:
 
 \begin{table}[ht]
 \centering
@@ -214,10 +279,7 @@ pH          & 1 & 4.58 & 4.58 & 4.77 & 0.2733 \\
 \end{tabular}
 \end{table}
 
-\hypertarget{insert-tables-by-hand}{%
-\paragraph{Insert tables by hand}\label{insert-tables-by-hand}}
-
-Show as Table. \ref{tab:byhand}:
+수작업으로 표를 넣는 경우 \ref{tab:byhand}:
 
 \begin{longtable}[]{@{}llll@{}}
 \caption{\label{tab:byhand} Caption here.}\tabularnewline
@@ -236,11 +298,9 @@ row 1 & 190 & \(112 \pm 2\) & \(233 \pm 3\)\tabularnewline
 \bottomrule
 \end{longtable}
 
-\hypertarget{figures}{%
-\paragraph{Figures}\label{figures}}
+\section{R 그래프}\label{r-}
 
-Insert figure by code chunk. And cross-ref it back as Figure
-\ref{fig:figName}.
+그래프 참조를 하는 방법 \ref{fig:figName}.
 
 \begin{figure}
 
@@ -251,44 +311,69 @@ Insert figure by code chunk. And cross-ref it back as Figure
 \caption{Your caption here.}\label{fig:figName}
 \end{figure}
 
-Or if you already have the figure: And cite it as Figure \ref{fig:fig2}.
+\subsection{문제해결}
+
+GUI로 해결하기 힘든 아래와 같이 \texttt{pdf} 파일 생성시 생긴 문제는
+구글 검색을 통해서 stackoverflow
+\href{https://stackoverflow.com/questions/18178084/pandoc-and-foreign-characters}{Pandoc
+and foreign characters}에서 해법을 찾아
+\texttt{-\/-latex-engine=xelatex\ -V\ CJKmainfont=NanumGothic}와 같이
+글꼴까지 반영시킨다.
+
+\begin{verbatim}
+! Package inputenc Error: Unicode character 내 (U+B0B4)
+(inputenc)                not set up for use with LaTeX.
+\end{verbatim}
+
+\section{R 코드}\label{r-}
+
+\subsection{기술통계량}
+
+\begin{verbatim}
+##       mpg            cyl            disp           hp           drat     
+##  Min.   :10.4   Min.   :4.00   Min.   : 71   Min.   : 52   Min.   :2.76  
+##  1st Qu.:15.4   1st Qu.:4.00   1st Qu.:121   1st Qu.: 96   1st Qu.:3.08  
+##  Median :19.2   Median :6.00   Median :196   Median :123   Median :3.69  
+##  Mean   :20.1   Mean   :6.19   Mean   :231   Mean   :147   Mean   :3.60  
+##  3rd Qu.:22.8   3rd Qu.:8.00   3rd Qu.:326   3rd Qu.:180   3rd Qu.:3.92  
+##  Max.   :33.9   Max.   :8.00   Max.   :472   Max.   :335   Max.   :4.93
+\end{verbatim}
+
+\subsection{회귀모형}
+
+\begin{verbatim}
+## # A tibble: 2 x 5
+##   term        estimate std.error statistic  p.value
+##   <chr>          <dbl>     <dbl>     <dbl>    <dbl>
+## 1 (Intercept)  29.6      1.23        24.1  3.58e-21
+## 2 disp         -0.0412   0.00471     -8.75 9.38e-10
+\end{verbatim}
+
+\subsection{시각화}
 
 \begin{figure}
 
-{\centering \includegraphics[width=0.7\linewidth]{D:\webzen\author_carpentry_kr\tutorial\rmarkdown_paper/Figs/plot} 
+{\centering \includegraphics{ms_files/figure-latex/mtcarsGraph-1} 
 
 }
 
-\caption{Caption here.}\label{fig:fig2}
+\caption{Mtcars 그래프}\label{fig:mtcarsGraph}
 \end{figure}
 
-More details can be found at
-\href{https://bookdown.org/yihui/bookdown/}{here}.
+\subsection{\texorpdfstring{첨부: \texttt{pandoc} 컴파일
+코드}{첨부: pandoc 컴파일 코드}}\label{-pandoc--}
 
-\hypertarget{references}{%
-\section*{References}\label{references}}
-\addcontentsline{toc}{section}{References}
+\section*{참고문헌}
+\addcontentsline{toc}{section}{참고문헌}
 
 \hypertarget{refs}{}
-\leavevmode\hypertarget{ref-adair_single-pool_2010}{}%
-Adair, E. C., S. E. Hobbie, and R. K. Hobbie. 2010. Single-pool
-exponential decomposition models: Potential pitfalls in their use in
-ecological studies. Ecology 91:1225--1236.
+\hypertarget{ref-DBLP:journalsux2fcorrux2fSimperlerW15}{}
+\textsc{Simperler, A. and Wilson, G.} 2015. Software carpentry get more
+done in less time. \emph{CoRR} \emph{abs/1506.02575}.
 
-\leavevmode\hypertarget{ref-clark_loss_2008}{}%
-Clark, C. M., and D. Tilman. 2008. Loss of plant species after chronic
-low-level nitrogen deposition to prairie grasslands. Nature
-451:712--715.
-
-\leavevmode\hypertarget{ref-eriksson_seed_1993}{}%
-Eriksson, O., and J. Ehrlén. 1993. Seed and microsite limitation of
-recruitment in plant populations. Oecologia 92:361--366.
-
-\leavevmode\hypertarget{ref-williamson_dissolved_1999}{}%
-Williamson, C. E., D. P. Morris, M. L. Pace, and O. G. Olson. 1999.
-Dissolved organic carbon and nutrients as regulators of lake ecosystems:
-Resurrection of a more integrated paradigm. Limnology and Oceanography
-44:795--803.
+\hypertarget{ref-10.1371ux2fjournal.pbio.1001745}{}
+\textsc{Wilson, D.A.A.B., Greg AND Aruliah}. 2014. Best practices for
+scientific computing. \emph{PLOS Biology} \emph{12}, 1, 1--7.
 
 
 \end{document}
