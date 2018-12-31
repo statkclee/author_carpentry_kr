@@ -18,5 +18,10 @@ data/KaggleV2-May-2016.csv
 data/churn_network.xlsx
 .Rhistory
 *.log
-*.pdf
 .Rproj.user
+tutorial/06_minimal_make/ex1/data_science.aux
+tutorial/06_minimal_make/ex1/data_science.bbl
+tutorial/06_minimal_make/ex1/data_science.blg
+tutorial/06_minimal_make/ex1/data_science.out
+*.Rout
+*.RData
