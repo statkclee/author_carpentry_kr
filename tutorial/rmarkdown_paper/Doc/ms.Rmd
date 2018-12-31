@@ -1,5 +1,5 @@
 ---
-title: "Your Awesome Title"
+title: "한글 논문"
 author: "Author One and Author Two"
 date: '`r format(Sys.time())`'
 output:
@@ -8,7 +8,7 @@ output:
       before_body: ../template/doc_prefix.tex
       in_header: ../template/preamble.tex
     keep_tex: yes
-    latex_engine: pdflatex
+    latex_engine: xelatex
     number_sections: no
     toc: no
   bookdown::html_document2:

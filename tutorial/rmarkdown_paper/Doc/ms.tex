@@ -26,7 +26,7 @@
 \usepackage[margin=1in]{geometry}
 \usepackage{hyperref}
 \hypersetup{unicode=true,
-            pdftitle={Your Awesome Title},
+            pdftitle={한글 논문},
             pdfauthor={Author One and Author Two},
             pdfborder={0 0 0},
             breaklinks=true}
@@ -77,7 +77,7 @@
 
 \setlength{\droptitle}{-2em}
 
-  \title{Your Awesome Title}
+  \title{한글 논문}
     \pretitle{\vspace{\droptitle}\centering\huge}
   \posttitle{\par}
     \author{Author One and Author Two}
@@ -85,34 +85,31 @@
   \postauthor{\par}
       \predate{\centering\large\emph}
   \postdate{\par}
-<<<<<<< HEAD
-    \date{2018-12-31 11:10:57}
-=======
-    \date{2018-12-31 11:05:31}
->>>>>>> 116a3cc07638f708461c47c18e08b1ca18d61961
+    \date{2018-12-31 12:03:20}
 
 \usepackage{geometry}
 \geometry{verbose,letterpaper,margin=2.45cm}
 
 % \usepackage[breaklinks=true,pdfstartview=FitH,citecolor=blue]{hyperref}
-\hypersetup{colorlinks,%
-	citecolor=blue,%
-	filecolor=red,%
-	linkcolor=blue,%
-	urlcolor=red,%
-	pdfstartview=FitH}
 
-\usepackage[T1]{fontenc}
-\usepackage[utf8]{inputenc}
-\usepackage{textgreek}
-\usepackage[greek,english]{babel}
-\usepackage{microtype}
-\usepackage{amsmath}
-\usepackage[osf]{libertine}
-\usepackage{libertinust1math}
-\usepackage{inconsolata}
+%\documentclass{oblivoir}
+%\usepackage{fontspec}
+%\usepackage{unicode-math}
+\usepackage{kotex}
+%\usepackage[T1]{fontenc}
+%\usepackage[utf8]{inputenc}
+% \usepackage{textgreek}
+% \usepackage[greek,english]{babel}
+%\usepackage{microtype}
+% \usepackage{amsmath}
+% \usepackage[osf]{libertine}
+% \usepackage{libertinust1math}
+%\usepackage{amsmath}
+%\usepackage{mathspec}
 
-\usepackage{booktabs}
+%\usepackage{inconsolata}
+
+%\usepackage{booktabs}
 
 \usepackage{setspace}
 \doublespacing
@@ -123,7 +120,6 @@
 \linenumbers
 
 % \renewcommand{\rmdefault}{cmr}
-
 
 % flush left while keep identation
 \makeatletter
@@ -148,8 +144,7 @@
 
 \clearpage
 
-\hypertarget{introduction}{%
-\section{Introduction}\label{introduction}}
+\section{Introduction}\label{introduction}
 
 Here is your introduction. It should describe clearly the rationale for
 the study being done and the previous work related with the study. It
@@ -162,28 +157,25 @@ et al. \protect\hyperlink{ref-williamson_dissolved_1999}{1999})
 
 Here is the second paragraph of the introduction.
 
-\hypertarget{methods}{%
-\section{Methods}\label{methods}}
+\section{Methods}\label{methods}
 
 Here is the method section. You can include equations easily. For inline
 equations, use \(\text{var}(X) = p(1-p)\). For display equation, use
 
 \[\text{var}(X) = p(1-p)\]
 
-\hypertarget{results}{%
-\subsection{Results}\label{results}}
+\subsection{Results}\label{results}
 
-\hypertarget{tables}{%
-\paragraph{Tables}\label{tables}}
+\paragraph{Tables}\label{tables}
 
 Insert tables by \texttt{kable} in knitr package in R. Then
 cross-reference it back with: see Table \ref{tab:tableName}.
 
-\begin{table}[t]
+\begin{table}
 
 \caption{\label{tab:tableName}Caption here.}
 \centering
-\begin{tabular}{rr}
+\begin{tabular}[t]{rr}
 \toprule
 Plot & sprich\\
 \midrule
@@ -197,9 +189,8 @@ Plot & sprich\\
 
 Put results inline, e.g.~the mean species richness is 28.
 
-\hypertarget{insert-tables-by-xtable-package-in-r}{%
 \paragraph{\texorpdfstring{Insert tables by \texttt{xtable} package in
-R}{Insert tables by xtable package in R}}\label{insert-tables-by-xtable-package-in-r}}
+R}{Insert tables by xtable package in R}}\label{insert-tables-by-xtable-package-in-r}
 
 Show as Table. \ref{t:anova}:
 
@@ -218,8 +209,7 @@ pH          & 1 & 4.58 & 4.58 & 4.77 & 0.2733 \\
 \end{tabular}
 \end{table}
 
-\hypertarget{insert-tables-by-hand}{%
-\paragraph{Insert tables by hand}\label{insert-tables-by-hand}}
+\paragraph{Insert tables by hand}\label{insert-tables-by-hand}
 
 Show as Table. \ref{tab:byhand}:
 
@@ -240,8 +230,7 @@ row 1 & 190 & \(112 \pm 2\) & \(233 \pm 3\)\tabularnewline
 \bottomrule
 \end{longtable}
 
-\hypertarget{figures}{%
-\paragraph{Figures}\label{figures}}
+\paragraph{Figures}\label{figures}
 
 Insert figure by code chunk. And cross-ref it back as Figure
 \ref{fig:figName}.
@@ -259,7 +248,7 @@ Or if you already have the figure: And cite it as Figure \ref{fig:fig2}.
 
 \begin{figure}
 
-{\centering \includegraphics[width=0.7\linewidth]{D:\webzen\author_carpentry_kr\tutorial\rmarkdown_paper/Figs/plot} 
+{\centering \includegraphics[width=0.7\linewidth]{/Users/statkclee/swc/author_carpentry_kr/tutorial/rmarkdown_paper/Figs/plot} 
 
 }
 
@@ -269,26 +258,25 @@ Or if you already have the figure: And cite it as Figure \ref{fig:fig2}.
 More details can be found at
 \href{https://bookdown.org/yihui/bookdown/}{here}.
 
-\hypertarget{references}{%
-\section*{References}\label{references}}
+\section*{References}\label{references}
 \addcontentsline{toc}{section}{References}
 
 \hypertarget{refs}{}
-\leavevmode\hypertarget{ref-adair_single-pool_2010}{}%
+\hypertarget{ref-adair_single-pool_2010}{}
 Adair, E. C., S. E. Hobbie, and R. K. Hobbie. 2010. Single-pool
 exponential decomposition models: Potential pitfalls in their use in
 ecological studies. Ecology 91:1225--1236.
 
-\leavevmode\hypertarget{ref-clark_loss_2008}{}%
+\hypertarget{ref-clark_loss_2008}{}
 Clark, C. M., and D. Tilman. 2008. Loss of plant species after chronic
 low-level nitrogen deposition to prairie grasslands. Nature
 451:712--715.
 
-\leavevmode\hypertarget{ref-eriksson_seed_1993}{}%
+\hypertarget{ref-eriksson_seed_1993}{}
 Eriksson, O., and J. Ehrlén. 1993. Seed and microsite limitation of
 recruitment in plant populations. Oecologia 92:361--366.
 
-\leavevmode\hypertarget{ref-williamson_dissolved_1999}{}%
+\hypertarget{ref-williamson_dissolved_1999}{}
 Williamson, C. E., D. P. Morris, M. L. Pace, and O. G. Olson. 1999.
 Dissolved organic carbon and nutrients as regulators of lake ecosystems:
 Resurrection of a more integrated paradigm. Limnology and Oceanography
