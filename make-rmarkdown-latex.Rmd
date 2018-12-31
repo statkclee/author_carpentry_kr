@@ -1,0 +1,114 @@
+---
+layout: page
+title: "데이터 과학: 재현가능한 저작"
+subtitle: "R 마크다운 + `make`"
+date: "`r Sys.Date()`"
+author: xwMOOC
+output:
+  html_document: 
+    toc: yes
+    toc_float: true
+    highlight: tango
+    code_folding: show
+    number_section: true
+    self_contained: true
+    lib_dir: gapminder
+editor_options: 
+  chunk_output_type: console
+---
+
+``` {r, include=FALSE}
+# source("tools/chunk-options.R")
+knitr::opts_chunk$set(echo = TRUE, warning=FALSE, message=FALSE,
+                    comment="", digits = 3, tidy = FALSE, prompt = FALSE, fig.align = 'center')
+
+```
+
+# R 마크다운 + `make` 논문제작 자동화 {#automate-make-rmarkdown}
+
+[Minimal make: A minimal tutorial on make](https://github.com/kbroman/minimal_make)를 바탕으로 영문논문 제작과정을 
+R 마크다운에서 작업하도록 [Daijiang Li (2017/04/05, "Writing Academic Papers with Rmarkdown"](https://daijiang.name/en/2017/04/05/writing-academic-papers-with-rmarkdown/)에 
+관련 내용이 상세히 정리되어 있다.
+
+# 논문 자동화 작업흐름도 {#automate-make-rmarkdown-workflow}
+
+`Makefile`을 중심으로 논문제작 자동화를 수행하고 
+`doc\ms.Rmd` R 마크다운 파일에 참고문헌(`reference\`), 논문외양(`template\`)을 지정하고 
+`R\` 디렉토리에 외부 데이터를 가져와서 분석하는 내용을 스크립트로 작성한다.
+
+``` {r automate-paper-pdf, eval=FALSE}
+# .\
+#     Makefile
+# └─doc
+# │      ms.Rmd
+# │      ms.pdf
+# │      ms.html
+# └─reference
+#      acm-siggraph.csl
+#      data_science.bib
+# └─template
+#      preamble.tex
+#      doc_prefix.tex
+# └─R
+#      rcode.R
+# │
+# └─fig
+#         gui-vs-cli.jpg
+#         plot.pdf
+# └─data
+#        └─raw_data
+#                     envi.csv
+#                     under2012.csv
+```
+
+
+# 한글 논문 자동화 {#automate-make-rmarkdown-workflow-korean}
+
+$\LaTeX$엔진이 `xelatex`이라 `pdflatex`을 기본으로 사용할 경우 다사다난한 한해를 보낼 수 있으니 주의한다.
+$\LaTeX$엔진을 `xelatex`로 지정한 경우 `\usepackage{kotex}`을 반듯이 `preamble.tex`에 넣어 문제가 생기지 않도록 조치도 취한다.
+
+``` {r automate-paper-pdf-korean, eval=FALSE}
+\usepackage{geometry}
+\geometry{verbose,letterpaper,margin=2.45cm}
+
+% \usepackage[breaklinks=true,pdfstartview=FitH,citecolor=blue]{hyperref}
+\hypersetup{colorlinks,%
+  citecolor=blue,%
+  filecolor=red,%
+  linkcolor=blue,%
+  urlcolor=red,%
+  pdfstartview=FitH}
+
+\usepackage{kotex}
+\usepackage{textgreek}
+\usepackage[greek,english]{babel}
+\usepackage{microtype}
+\usepackage{amsmath}
+\usepackage[osf]{libertine}
+\usepackage{libertinust1math}
+\usepackage{inconsolata}
+
+\usepackage{booktabs}
+
+\usepackage{setspace}
+\doublespacing
+
+% \setstretch{1.8999999999999999}
+
+\usepackage{lineno}
+\linenumbers
+
+% \renewcommand{\rmdefault}{cmr}
+
+
+% flush left while keep identation
+\makeatletter
+\newcommand\iraggedright{%
+  \let\\\@centercr\@rightskip\@flushglue \rightskip\@rightskip
+  \leftskip\z@skip}
+\makeatother
+
+% make pdf as default figure format
+\DeclareGraphicsExtensions{.pdf,.png, %
+    .jpg,.mps,.jpeg,.jbig2,.jb2,.JPG,.JPEG,.JBIG2,.JB2}
+```

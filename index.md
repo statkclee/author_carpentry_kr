@@ -15,10 +15,8 @@ title: "데이터 과학: 재현가능한 저작"
     - [R 마크다운 논문](rmarkdown-authoring-paper.html)
 - **`Makefile`**
     - [minimal make](minimal-make-latex.html)
+    - [R 마크다운 + `make`](make-rmarkdown-latex.html)
 - [디지털 객체 식별자(DOI, Digital Object Identifiers)](authoring-doi.html)
-
-`pandoc` 버전: 1.19.2.
-
 
 ## [xwMOOC 오픈 교재](https://statkclee.github.io/xwMOOC/)
 
