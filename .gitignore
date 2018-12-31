@@ -19,5 +19,4 @@ data/churn_network.xlsx
 .Rhistory
 *.log
 *.pdf
-
 .Rproj.user
