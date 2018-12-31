@@ -85,7 +85,7 @@
   \postauthor{\par}
       \predate{\centering\large\emph}
   \postdate{\par}
-    \date{2018-12-31 12:03:20}
+    \date{2018-12-31 13:55:41}
 
 \usepackage{geometry}
 \geometry{verbose,letterpaper,margin=2.45cm}
@@ -144,7 +144,8 @@
 
 \clearpage
 
-\section{Introduction}\label{introduction}
+\hypertarget{introduction}{%
+\section{Introduction}\label{introduction}}
 
 Here is your introduction. It should describe clearly the rationale for
 the study being done and the previous work related with the study. It
@@ -157,25 +158,28 @@ et al. \protect\hyperlink{ref-williamson_dissolved_1999}{1999})
 
 Here is the second paragraph of the introduction.
 
-\section{Methods}\label{methods}
+\hypertarget{methods}{%
+\section{Methods}\label{methods}}
 
 Here is the method section. You can include equations easily. For inline
 equations, use \(\text{var}(X) = p(1-p)\). For display equation, use
 
 \[\text{var}(X) = p(1-p)\]
 
-\subsection{Results}\label{results}
+\hypertarget{results}{%
+\subsection{Results}\label{results}}
 
-\paragraph{Tables}\label{tables}
+\hypertarget{tables}{%
+\paragraph{Tables}\label{tables}}
 
 Insert tables by \texttt{kable} in knitr package in R. Then
 cross-reference it back with: see Table \ref{tab:tableName}.
 
-\begin{table}
+\begin{table}[t]
 
 \caption{\label{tab:tableName}Caption here.}
 \centering
-\begin{tabular}[t]{rr}
+\begin{tabular}{rr}
 \toprule
 Plot & sprich\\
 \midrule
@@ -189,8 +193,9 @@ Plot & sprich\\
 
 Put results inline, e.g.~the mean species richness is 28.
 
+\hypertarget{insert-tables-by-xtable-package-in-r}{%
 \paragraph{\texorpdfstring{Insert tables by \texttt{xtable} package in
-R}{Insert tables by xtable package in R}}\label{insert-tables-by-xtable-package-in-r}
+R}{Insert tables by xtable package in R}}\label{insert-tables-by-xtable-package-in-r}}
 
 Show as Table. \ref{t:anova}:
 
@@ -209,7 +214,8 @@ pH          & 1 & 4.58 & 4.58 & 4.77 & 0.2733 \\
 \end{tabular}
 \end{table}
 
-\paragraph{Insert tables by hand}\label{insert-tables-by-hand}
+\hypertarget{insert-tables-by-hand}{%
+\paragraph{Insert tables by hand}\label{insert-tables-by-hand}}
 
 Show as Table. \ref{tab:byhand}:
 
@@ -230,7 +236,8 @@ row 1 & 190 & \(112 \pm 2\) & \(233 \pm 3\)\tabularnewline
 \bottomrule
 \end{longtable}
 
-\paragraph{Figures}\label{figures}
+\hypertarget{figures}{%
+\paragraph{Figures}\label{figures}}
 
 Insert figure by code chunk. And cross-ref it back as Figure
 \ref{fig:figName}.
@@ -248,7 +255,7 @@ Or if you already have the figure: And cite it as Figure \ref{fig:fig2}.
 
 \begin{figure}
 
-{\centering \includegraphics[width=0.7\linewidth]{/Users/statkclee/swc/author_carpentry_kr/tutorial/rmarkdown_paper/Figs/plot} 
+{\centering \includegraphics[width=0.7\linewidth]{D:\webzen\author_carpentry_kr\tutorial\rmarkdown_paper/Figs/plot} 
 
 }
 
@@ -258,25 +265,26 @@ Or if you already have the figure: And cite it as Figure \ref{fig:fig2}.
 More details can be found at
 \href{https://bookdown.org/yihui/bookdown/}{here}.
 
-\section*{References}\label{references}
+\hypertarget{references}{%
+\section*{References}\label{references}}
 \addcontentsline{toc}{section}{References}
 
 \hypertarget{refs}{}
-\hypertarget{ref-adair_single-pool_2010}{}
+\leavevmode\hypertarget{ref-adair_single-pool_2010}{}%
 Adair, E. C., S. E. Hobbie, and R. K. Hobbie. 2010. Single-pool
 exponential decomposition models: Potential pitfalls in their use in
 ecological studies. Ecology 91:1225--1236.
 
-\hypertarget{ref-clark_loss_2008}{}
+\leavevmode\hypertarget{ref-clark_loss_2008}{}%
 Clark, C. M., and D. Tilman. 2008. Loss of plant species after chronic
 low-level nitrogen deposition to prairie grasslands. Nature
 451:712--715.
 
-\hypertarget{ref-eriksson_seed_1993}{}
+\leavevmode\hypertarget{ref-eriksson_seed_1993}{}%
 Eriksson, O., and J. Ehrlén. 1993. Seed and microsite limitation of
 recruitment in plant populations. Oecologia 92:361--366.
 
-\hypertarget{ref-williamson_dissolved_1999}{}
+\leavevmode\hypertarget{ref-williamson_dissolved_1999}{}%
 Williamson, C. E., D. P. Morris, M. L. Pace, and O. G. Olson. 1999.
 Dissolved organic carbon and nutrients as regulators of lake ecosystems:
 Resurrection of a more integrated paradigm. Limnology and Oceanography
