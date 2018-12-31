@@ -3,42 +3,15 @@ title: "CLI vs GUI 내전"
 date: "2018년 12월"
 author: "이정훈, CLI 종족 지도자"
 output: 
-  bookdown::pdf_document2:
-    includes:
-      before_body: "template/doc_prefix.tex"
-      in_header: "template/preamble.tex"
-    keep_tex: yes
+  pdf_document:
     latex_engine: xelatex
-    number_sections: yes
-    toc: no
-  bookdown::html_document2:
-    number_sections: no
-    theme: readable
-    toc: yes
-  bookdown::tufte_html2:
-    number_sections: no
-    toc: yes
-  bookdown::word_document2: null
-fontsize: 12pt
-linestretch: 1.5
-link-citations: yes
-bibliography: "reference/data_science.bib"
-csl: "reference/acm-siggraph.csl"
 mainfont: NanumGothic
-editor_options: 
-  chunk_output_type: console
+bibliography: data_science.bib
+csl: acm-siggraph.csl
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE)
-
-# download template files if not available
-tpl_1 <- 'https://raw.githubusercontent.com/daijiang/workflow_demo/master/template/preamble.tex'
-tpl_2 <- 'https://raw.githubusercontent.com/daijiang/workflow_demo/master/template/doc_prefix.tex'
-# bib_1 <- 'https://raw.githubusercontent.com/daijiang/workflow_demo/master/template/ref.bib'
-# change directory accordingly
-if(!file.exists(tpl_1f <- 'template/preamble.tex')) download.file(tpl_1, tpl_1f)
-if(!file.exists(tpl_2f <- 'template/doc_prefix.tex')) download.file(tpl_2, tpl_2f)
+knitr::opts_chunk$set(echo = TRUE)
 ```
 
 
@@ -70,33 +43,6 @@ GUI로 해결하기 힘든 아래와 같이 `pdf` 파일 생성시 생긴 문제
 ```
 ! Package inputenc Error: Unicode character 내 (U+B0B4)
 (inputenc)                not set up for use with LaTeX.
-```
-
-# R 코드 
-
-## 기술통계량
-
-```{r sample}
-suppressMessages(library(tidyverse))
-summary(mtcars[,1:5])
-```
-
-## 회귀모형
-
-```{r sample-reg}
-mtcars_reg <- lm(mpg ~ disp, data=mtcars)
-
-mtcars_reg %>% broom::tidy()
-```
-
-## 시각화 
-
-```{r sample-viz}
-mtcars %>% 
-  mutate(vs = as.factor(vs)) %>% 
-  ggplot(aes(x=disp, y=mpg, color=vs)) +
-    geom_point() +
-    geom_abline(intercept = coef(mtcars_reg)[1], slope= coef(mtcars_reg)[2])
 ```
 
 ## 첨부: `pandoc` 컴파일 코드
