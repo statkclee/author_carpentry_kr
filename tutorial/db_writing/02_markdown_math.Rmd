@@ -1,0 +1,58 @@
+---
+title: "마크다운(markdown), 수학"
+author: "이광춘"
+date: '`r Sys.Date()`'
+output: 
+  pdf_document:
+    latex_engine: xelatex
+mainfont: NanumGothic
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# 수학
+
+마크다운에서 수식은 `$` 수식 `$` 혹은 `$$` 수식 `$$`으로 작성할 수 있다.
+
+## 수식
+
+파타고라스 공식
+
+$$a^2 + b^2 = c^2$$
+
+표준정규분포
+
+$$\text{표준정규분포} = \frac{1}{{\sqrt {2\pi } }}e^{ - \frac{{z^2 }}{2}}$$
+
+
+## 행렬
+
+\begin{equation}
+    y = \begin{bmatrix}
+        T & I
+     \end{bmatrix}
+    \begin{bmatrix}
+        a \\
+        e
+    \end{bmatrix}
+\end{equation}
+
+
+## 표
+
+\begin{tabular}{lrc}
+\hline
+Country & GDP (pc) & Exchange rate \\
+\hline
+Australia & US\$30,666 & \$0.96 \\
+Burma & US\$2,029 & \$0.16 \\
+New Zealand & US\$26,725 & \$0.78 \\
+\hline
+\end{tabular}
+
+
+
