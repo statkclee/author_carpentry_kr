@@ -17,6 +17,7 @@ title: "데이터 과학: 재현가능한 저작"
     - [minimal make](minimal-make-latex.html)
     - [R 마크다운 + `make`](make-rmarkdown-latex.html)
 - [디지털 객체 식별자(DOI, Digital Object Identifiers)](authoring-doi.html)
+- [BMI 학습 교재](tutorial/reproducible_finance/reproducible_finance.html)
 
 ## [xwMOOC 오픈 교재](https://statkclee.github.io/xwMOOC/)
 
