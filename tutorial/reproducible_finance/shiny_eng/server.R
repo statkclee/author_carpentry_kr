@@ -27,14 +27,14 @@ server <- function(input, output, session) {
     
     if (is.null(uploaded_img_path)) {
       if(input$flag_check) {
-        withProgress(message = '사진 판별중...', value = 1,
+        withProgress(message = 'Classify...', value = 1,
                      classify_image("www/Flag_of_South_Korea.jpg")
         )
       } else {
         NULL   
       }
     } else {
-      withProgress(message = 'Predicting...', value = 1,
+      withProgress(message = 'Classify...', value = 1,
                    img2tbl_df <- classify_image(uploaded_img_path)
       )
       DT::datatable(img2tbl_df)

@@ -2,7 +2,7 @@
 shinyUI(fluidPage(
   
   # Application title
-  titlePanel("데이터 사이언스 언어 R - 기계 이미지 인식"),
+  titlePanel("Data Science Language R - Image Recognition"),
   
   # Sidebar with a slider input for number of bins 
   sidebarLayout(
@@ -14,7 +14,7 @@ shinyUI(fluidPage(
       tags$hr(),
       
       # Check Keon-Woong Moon image ----
-      checkboxInput("flag_check", "기본 예제 사진(태극기)", FALSE)
+      checkboxInput("flag_check", "Default Image (Flag)", FALSE)
     ),
     
     # Show Image & Keras Output
