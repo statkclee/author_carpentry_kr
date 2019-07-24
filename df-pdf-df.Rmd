@@ -1,0 +1,197 @@
+---
+layout: page
+title: "데이터 과학: 재현가능한 저작"
+subtitle: "영문 이력서: DF &rarr; PDF &rarr; DF"
+date: "`r Sys.Date()`"
+author: xwMOOC
+output:
+  html_document: 
+    toc: yes
+    toc_float: true
+    highlight: tango
+    code_folding: show
+    number_section: true
+    self_contained: true
+editor_options: 
+  chunk_output_type: console
+---
+
+``` {r, include=FALSE}
+# source("tools/chunk-options.R")
+knitr::opts_chunk$set(echo = TRUE, warning=FALSE, message=FALSE,
+                    comment="", digits = 3, tidy = FALSE, prompt = FALSE, fig.align = 'center')
+
+```
+
+
+개괄적인 작업흐름은 데이터프레임 정형데이터에서 `pandoc` 계열 도구와 마크다운, $LaTex$ 언어 등을 활용 다양한 문서를 만들어내는 것이고 이렇게 다양한 문서 데이터를 다시 다양한 도구와 방법론을 사용해서 정형데이터로 만들어 낸다.
+
+<img src="fig/digital_labor_resume.png" alt="이력서 작업흐름" width="100%" />
+
+# 이력서 PDF 데이터 {#pdf-to-dataframe-data}
+
+예제 데이터로 공개된 영문 [Awesome CV is LaTeX template for your outstanding job application](https://github.com/posquit0/Awesome-CV) PDF 파일을 사용한다.
+
+
+<div class = "row">
+  <div class = "col-md-6">
+**첫번째 페이지**
+
+```{r pdf-png}
+library(pdftools)
+library(magick)
+
+resume_first_png <- pdf_render_page("data/resume.pdf", page = 1, dpi = 300, numeric = FALSE)
+image_read(resume_first_png)
+```
+
+  </div>
+  <div class = "col-md-6">
+**두번째 페이지**
+
+```{r pdf-png-resume}
+resume_second_png <- pdf_render_page("data/resume.pdf", page = 2, dpi = 300, numeric = FALSE)
+image_read(resume_second_png)
+```
+
+  </div>
+</div>
+
+# PDF &rarr; 데이터프레임 {#pdf-to-dataframe}
+
+반정형 이력서 PDF 파일에서 데이터프레임을 추출한다. 
+
+## 데이터 구분 {#pdf-to-dataframe-section}
+
+```{r read-pdf-section}
+library(pdftools)
+library(tidyverse)
+
+cv_dat <- pdf_text("data/resume.pdf")
+
+cv_dat <- paste0(unlist(cv_dat), collapse = "")
+
+cv_split_dat <- cv_dat %>% 
+  str_split(pattern="\r\n") %>% 
+  .[[1]]
+
+# 인적사항 -------------------
+`인적사항_idx` <- cv_split_dat %>% 
+  str_detect("Summary") %>% 
+  which(TRUE)
+
+인적사항 <- cv_split_dat[1:(`인적사항_idx`-1)]
+
+# 요약("Summary") -------------------
+`요약_idx` <- cv_split_dat %>% 
+  str_detect("Work Experience") %>% 
+  which(TRUE)
+
+요약 <- cv_split_dat[(`인적사항_idx`+1):(`요약_idx`-1)]
+
+# 직장경력("Work Experience") -------------------
+`직장경력_idx` <- cv_split_dat %>% 
+  str_detect("Honors & Awards") %>% 
+  which(TRUE)
+
+직장경력 <- cv_split_dat[(`요약_idx`+1):(`직장경력_idx`-1)]
+
+# 수상이력 ("Honors & Awards") -------------------
+`수상이력_idx` <- cv_split_dat %>% 
+  str_detect("Presentation") %>% 
+  which(TRUE)
+
+수상이력 <- cv_split_dat[(`직장경력_idx`+1):(`수상이력_idx`-1)]
+
+# 발표("Presentation") -------------------
+`발표_idx` <- cv_split_dat %>% 
+  str_detect("Writing") %>% 
+  which(TRUE)
+
+발표 <- cv_split_dat[(`수상이력_idx`+1):(`발표_idx`-1)]
+
+# 저서("Writing") -------------------
+`저서_idx` <- cv_split_dat %>% 
+  str_detect("Program Committees") %>% 
+  which(TRUE)
+
+저서 <- cv_split_dat[(`발표_idx`+1):(`저서_idx`-1)]
+
+# 심사("Program Committees") -------------------
+`심사_idx` <- cv_split_dat %>% 
+  str_detect("Education") %>% 
+  which(TRUE)
+
+심사 <- cv_split_dat[(`저서_idx`+1):(`심사_idx`-1)]
+
+# 학교("Education") -------------------
+`학교_idx` <- cv_split_dat %>% 
+  str_detect("Extracurricular") %>% 
+  which(TRUE)
+
+학교 <- cv_split_dat[(`심사_idx`+1):(`학교_idx`-1)]
+
+# 특활활동("Extracurricular") -------------------
+특활활동 <- cv_split_dat[(`학교_idx`+1):length(cv_split_dat)]
+
+## 이력서 구분
+
+cv_section_list <- list("인적사항" = 인적사항,
+     "요약" = 요약,
+     "직장경력" = 직장경력,
+     "수상이력" = 수상이력,
+     "발표" = 발표,
+     "저서" = 저서,
+     "심사" = 심사,
+     "학교"=학교, 
+     "특활활동"=특활활동)
+
+listviewer::jsonedit(cv_section_list)
+```
+
+## 데이터 정형화 {#pdf-to-dataframe-section-df}
+
+### 인적사항 {#pdf-to-dataframe-section-df-demo}
+
+```{r read-pdf-section-df-demo}
+인적사항 <- str_trim(인적사항) %>% str_remove_all(pattern="\uf10b|\uf0e0|\uf015|\uf092|\uf08c")
+
+이름 <- 인적사항[1]
+직무 <- 인적사항[2]
+주소 <- 인적사항[3]
+
+개인정보 <- str_split(인적사항[4], " \\| ") %>% .[[1]]
+전화번호 <- str_trim(개인정보[1])
+전자우편 <- str_trim(개인정보[2])
+홈페이지 <- str_trim(개인정보[3])
+GitHub   <- str_trim(개인정보[4])
+링크트인 <- str_trim(개인정보[5])
+
+인적사항_df <- tibble(
+  "이름" = 이름,
+  "직무" = 직무,
+  "주소" = 주소,
+  "전화번호" = 전화번호,
+  "전자우편" = 전자우편,
+  "홈페이지" = 홈페이지,
+  "Github"   = GitHub,
+  "링크트인" = 링크트인
+) 
+```
+
+### 요약 {#pdf-to-dataframe-section-df-summary}
+
+```{r read-pdf-section-df-summary}
+요약_df <- tibble(
+  "요약" = str_c(요약, collapse=" ")
+)
+```
+
+### 요약 {#pdf-to-dataframe-section-df-summary}
+
+```{r read-pdf-section-df-summary2}
+직장경력
+
+```
+
+
