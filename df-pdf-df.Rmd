@@ -177,6 +177,9 @@ GitHub   <- str_trim(개인정보[4])
   "Github"   = GitHub,
   "링크트인" = 링크트인
 ) 
+
+인적사항_df %>% 
+  DT::datatable()
 ```
 
 ### 요약 {#pdf-to-dataframe-section-df-summary}
@@ -185,13 +188,230 @@ GitHub   <- str_trim(개인정보[4])
 요약_df <- tibble(
   "요약" = str_c(요약, collapse=" ")
 )
+요약_df %>% 
+  DT::datatable()
 ```
 
-### 요약 {#pdf-to-dataframe-section-df-summary}
+### 직장경력 {#pdf-to-dataframe-section-df-career}
 
-```{r read-pdf-section-df-summary2}
-직장경력
+```{r read-pdf-section-df-career}
+직장 <- 직장경력[str_detect(직장경력, "S.Korea")]
 
+직장명 <- str_extract(직장, "^(.*?)[\\s+]{2}") %>% 
+  str_trim()
+근무지 <- str_remove(직장, "^(.*?)[\\s+]{2}") %>% 
+  str_trim()
+
+근무연도 <- 직장경력[str_detect(직장경력, "[A-Z]{1}[a-z]{2}.\\s[0-9]{4}")]
+
+역할     <- str_extract(근무연도, "^(.*?)[\\s+]{2}")
+근무기간 <- str_remove(근무연도, "^(.*?)[\\s+]{2}") %>% 
+  str_trim
+
+직장_df <- tibble(
+  "직장명" = 직장명,
+  "근무지" = 근무지,
+  "역할" = 역할,
+  "근무연도" = 근무연도
+)
+
+직장_df %>% 
+  DT::datatable()
 ```
 
+### 수상이력 {#pdf-to-dataframe-section-df-win}
+
+```{r read-pdf-section-df-win}
+
+수상 <- 수상이력[str_detect(수상이력, "^\\s+[0-9]{4}" )]
+
+수상년도 <- map_chr(수상, str_extract, "[0-9]{4}")
+
+수상등수 <- map_chr(수상, str_remove, "[0-9]{4}") %>% 
+  map_chr(str_trim) %>% 
+  map_chr(str_extract, "^(.*?),")
+
+수상프로그램 <- map_chr(수상, str_remove, "[0-9]{4}") %>% 
+  map_chr(str_trim) %>% 
+  map_chr(str_remove, "^(.*?),") %>% 
+  map_chr(str_extract, "^(.*?)[\\s+]{2}") %>% 
+  map_chr(str_trim)
+
+수상지역 <- map_chr(수상, str_remove, "[0-9]{4}") %>% 
+  map_chr(str_trim) %>% 
+  map_chr(str_remove, "^(.*?),") %>% 
+  map_chr(str_remove, "^(.*?)[\\s+]{2}") %>% 
+  map_chr(str_trim)
+
+수상_df <- tibble(
+  "수상년도" = 수상년도,
+  "수상등수" = 수상등수,
+  "수상프로그램" = 수상프로그램,
+  "수상지역" = 수상지역
+)
+
+수상_df %>% 
+  DT::datatable()
+```
+
+
+
+### 발표 {#pdf-to-dataframe-section-df-presentation}
+
+```{r read-pdf-section-df-presentation}
+발표제목 <- 발표[str_detect(발표, "Korea")]
+발표일 <- 발표[str_detect(발표, "[0-9]{4}")]
+
+발표제목 <- map_chr(발표제목, str_extract, "^(.*?)[\\s+]{2}") %>% 
+  map_chr(str_trim)
+
+발표일 <- map_chr(발표일, str_remove, "^(.*?)[\\s+]{2}") %>% 
+  map_chr(str_trim)
+
+발표_df <- tibble(
+  "발표제목" = 발표제목,
+  "발표일"   = 발표일
+)
+
+발표_df %>% 
+  DT::datatable()
+```
+
+
+### 저서 {#pdf-to-dataframe-section-df-book}
+
+```{r read-pdf-section-df-book}
+저서명 <- str_extract(저서[1], "^(.*?)[\\s+]{2}") %>% 
+  str_trim
+
+저자명 <- str_extract(저서[2], "^(.*?)[\\s+]{2}") %>% 
+  str_trim
+
+저작연도 <- str_remove(저서[2], "^(.*?)[\\s+]{2}") %>% 
+  str_trim
+
+저서_df <- tibble(
+  "저서명" = 저서명,
+  "저자명" = 저자명,
+  "저작연도" = 저작연도
+)
+
+저서_df %>% 
+  DT::datatable()
+```
+
+### 심사 {#pdf-to-dataframe-section-df-program}
+
+```{r read-pdf-section-df-program}
+심사년도 <- map_chr(심사, str_trim) %>% map_chr(., str_extract, "^[0-9]{4}")
+
+심사정보 <- map_chr(심사, str_trim) %>% map_chr(., str_remove, "^[0-9]{4}") %>% 
+  str_split(",") %>% 
+  map(., str_trim) 
+
+심사역할 <- map_chr(심사정보, 1)
+심사프로그램 <- map_chr(심사정보, 2) %>% 
+  map_chr(str_extract, "^(.*?)[\\s+]{2}") %>% 
+  map_chr(str_trim)
+
+심사지역 <- map_chr(심사정보, 2) %>% 
+  map_chr(str_remove, "^(.*?)[\\s+]{2}") %>% 
+  map_chr(str_trim)
+
+심사_df <- tibble(
+  "심사년도" = 심사년도,
+  "심사역할" = 심사역할,
+  "심사프로그램" = 심사프로그램,
+  "심사지역" = 심사지역
+)
+
+심사_df %>% 
+  DT::datatable()
+```
+
+
+### 학교 {#pdf-to-dataframe-section-df-education}
+
+```{r read-pdf-section-df-education}
+학교임시 <- str_split(학교[1], "    ")
+
+학교임시 <- 학교임시[[1]][학교임시[[1]] != ""]
+
+학교명   <- 학교임시[1]
+학교위치 <- 학교임시[2]
+
+학교_df <- tibble(
+  "학교명" = 학교명,
+  "학교위치" = 학교위치
+)
+
+학교_df %>% 
+  DT::datatable()
+```
+
+
+### 특활활동 {#pdf-to-dataframe-section-df-extra}
+
+```{r read-pdf-section-df-extra}
+특활활동
+
+특활 <- 특활활동[str_detect(특활활동, "S.Korea")]
+
+특활명 <- str_extract(특활, "^(.*?)\\s{2}") %>% 
+  str_trim
+특활지역 <- str_remove(특활, "^(.*?)\\s{2}") %>% 
+  str_trim
+
+특활연도 <- 특활활동[str_detect(특활활동, "[A-Z]{1}[a-z]{2}.\\s[0-9]{4}")]
+
+특활역할  <- str_extract(특활연도, "^(.*?)[\\s+]{2}") %>% str_trim
+특활기간 <- str_remove(특활연도, "^(.*?)[\\s+]{2}") %>% 
+  str_trim
+
+특활_df <- tibble(
+  "특활명" = 특활명,
+  "특활지역" = 특활지역,
+  "특활역할" = 특활역할,
+  "특활기간" = 특활기간
+)
+
+특활_df %>% 
+  DT::datatable()
+```
+
+### 데이터 저장 {#pdf-to-dataframe-section-df-save}
+
+```{r dataframe-save}
+인적사항_df %>% write_rds("data/인적사항_df")
+요약_df %>% write_rds("data/요약_df")
+직장_df %>% write_rds("data/직장_df")
+수상_df %>% write_rds("data/수상수상_df")
+발표_df %>% write_rds("data/발표_df")
+저서_df %>% write_rds("data/저서_df")
+심사_df %>% write_rds("data/심사_df")
+학교_df %>% write_rds("data/학교_df")
+특활_df %>% write_rds("data/특활_df")
+```
+
+## 정형 데이터 {#pdf-to-dataframe-done}
+
+```{r normalized-dataset}
+resume_df <- tibble(
+  "인적사항" = list(인적사항_df),
+  "요약" = list(요약_df),
+  "직장" = list(직장_df),
+  "수상" = list(수상_df),
+  "발표" = list(발표_df),
+  "저서" = list(저서_df),
+  "심사" = list(심사_df),
+  "학교" = list(학교_df),
+  "특활" = list(특활_df)
+)
+
+resume_df %>% 
+  DT::datatable()  
+
+resume_df %>% 
+  write_rds("data/resume_df.rds")
+```
 
