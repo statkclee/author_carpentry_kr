@@ -1,69 +1,88 @@
 ---
-name: Marie
-surname: Curie
-position: "Professor"
-address: "School of Physics & Chemistry, École Normale Supérieure"
-phone: +1 22 3333 4444
-www: mariecurie.com
-email: "Marie.Curie@ens.fr"
-twitter: mariecurie
-github: mariecurie
-linkedin: mariecurie
+name: Byungjin
+surname: Park
+position: "Software Architect, Security Expert"
+address: "42-8, Bangbae-ro 15-gil, Seocho-gu, Seoul, 00681, Rep. of KOREA"
+phone: (+82) 10-9030-1843
+www: www.posquit0.com
+email: "posquit0.bj@gmail.com"
+twitter: posquit0
+github: posquit0
+linkedin: posquit0
 date: "`r format(Sys.time(), '%B %Y')`"
 output: vitae::awesomecv
+editor_options: 
+  chunk_output_type: console
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
 library(vitae)
+library(tidyverse)
+resume_df <- readRDS("../data/resume_df.rds")
 ```
 
-# Some stuff about me
+# Summary
 
- * I poisoned myself doing research.
- * I was the first woman to win a Nobel prize
- * I was the first person and only woman to win a Nobel prize in two different sciences.
+```{r resume-summary}
+resume_df %>% 
+  select(요약) %>% 
+  unnest() %>% 
+  brief_entries(요약)
+```
+
+# Work Experience
+
+```{r vitae-work}
+resume_df %>% 
+  select(직장) %>% 
+  unnest() %>% 
+  detailed_entries(with=직장명, where=근무지, what=역할, when=근무연도)
+```
+
+<!-- # Honors & Awards -->
+
+<!-- ```{r vitae-honors} -->
+<!-- resume_df %>%  -->
+<!--   select(수상) %>%  -->
+<!--   unnest() %>%  -->
+<!--   detailed_entries(when=수상년도, 수상등수, 수상프로그램, 수상지역) -->
+<!-- ``` -->
+
+# Presentation
+
+```{r vitae-presentation}
+resume_df %>% 
+  select(발표) %>% 
+  unnest() %>% 
+  detailed_entries(발표제목, 발표일)
+```
+
+# Writing
+
+```{r vitae-writing}
+resume_df %>% 
+  select(저서) %>% 
+  unnest() %>% 
+  detailed_entries(저서명, what=저자명, when=저작연도)
+```
+
 
 # Education
 
-```{r}
-library(tibble)
-tribble(
-  ~ Degree, ~ Year, ~ Institution, ~ Where,
-  "Informal studies", "1889-91", "Flying University", "Warsaw, Poland",
-  "Master of Physics", "1893", "Sorbonne Université", "Paris, France",
-  "Master of Mathematics", "1894", "Sorbonne Université", "Paris, France"
-) %>% 
-  detailed_entries(Degree, Year, Institution, Where)
+```{r vitae-education}
+resume_df %>% 
+  select(학교) %>% 
+  unnest() %>% 
+  detailed_entries(학교명, 학교위치)
 ```
 
-# Nobel Prizes
+# Extracurricular Activity
 
-```{r}
-tribble(
-  ~Year, ~Type, ~Desc,
-  1903, "Physics", "Awarded for her work on radioactivity with Pierre Curie and Henri Becquerel",
-  1911, "Chemistry", "Awarded for the discovery of radium and polonium"
-) %>% 
-  brief_entries(
-    glue::glue("Nobel Prize in {Type}"),
-    Year, 
-    Desc
-  )
-```
-
-# Publications
-
-```{r}
-scholar::get_publications("EmD_lTEAAAAJ&EmD_lTEAAAAJ&") %>% 
-  filter(cites > 30) %>% 
-  distinct(title, .keep_all = TRUE) %>%
-  transmute(bibtype = "Article", author = as.character(author),
-            title = as.character(title),
-            journaltitle = as.character(journal), year, key = row_number()) %>% 
-  RefManageR::as.BibEntry() %>% 
-  RefManageR::WriteBib("curie.bib")
-
-bibliography_entries("curie.bib")
+```{r extra-curricular}
+resume_df %>% 
+  select(특활) %>% 
+  unnest() %>% 
+  detailed_entries(with=특활명, where=특활지역, what=특활역할, when=특활기간)
 ```
 
