@@ -22,6 +22,10 @@ title: "데이터 과학: 재현가능한 저작"
     - [영문 이력서: PDF &rarr; 데이터프레임](df-pdf-df.html)
     - [영문 이력서: 데이터프레임 &rarr; PDF](df-pdf.html)
 
+### 한림대학교 특강(디지털 리터러시)
+
+- [강의 노트](https://etherpad.net/p/hallym)
+
 ## [xwMOOC 오픈 교재](https://statkclee.github.io/xwMOOC/)
 
 - **컴퓨팅 사고력(Computational Thinking)**

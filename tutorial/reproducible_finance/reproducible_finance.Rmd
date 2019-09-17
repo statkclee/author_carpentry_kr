@@ -1,13 +1,14 @@
 ---
 layout: page
-title: "재현가능한 데이터 사이언스 - BMI"
+title: "재현가능한 데이터 사이언스(Data Science) - BMI"
 subtitle: "Reproducible Data Science"
 author:
     name: 이광춘 (KPMG)
     affilates: 데이터 과학자
 date: "`r Sys.Date()`"
 output:
-  word_document
+  html_document
+mainfont: AppleGothic
 editor_options: 
   chunk_output_type: console
 ---
@@ -43,7 +44,7 @@ use_condaenv("anaconda3")
 | 정상 | 18.5 - 24.9 |
 | 저체중 | 18.5 미만 |
 
-# 데이터 {#api-BMI}
+# 데이터 {#api-BMI-data}
 
 [캐글, "500 Person Gender-Height-Weight-Body Mass Index - Height and Weight random generated, Body Mass Index Calculated"](https://www.kaggle.com/yersever/500-person-gender-height-weight-bodymassindex)에서 데이터를 바탕으로 고객에게 체중과 키 및 라벨 데이터 **index**가 준비되어 있어 키와 몸무게를 통해 BMI 예측한다.
 
@@ -66,8 +67,11 @@ use_condaenv("anaconda3")
 
 ```{r bmi-import}
 library(tidyverse)
+library(here)
 
-bmi_dat <- read_csv("../../data/500_Person_Gender_Height_Weight_Index.csv")
+file_path <- here("data", "500_Person_Gender_Height_Weight_Index.csv")
+
+bmi_dat <- read_csv(file_path)
 
 glimpse(bmi_dat)
 
@@ -94,14 +98,16 @@ bmi_df %>%
 
 ## 시각화 {#api-BMI-EDA-descriptive-viz}
 
-```{r bmi-EDA-viz}
+```{r bmi-EDA-viz, eval=FALSE}
 bmi_df %>% 
   gather(키체중, 값, -Gender, -Index) %>% 
   ggplot(aes(x=Index, y= 값, fill=Gender)) +
     geom_boxplot(show.legend = FALSE) +
     facet_grid(키체중 ~ Gender,  scales="free") +
+    theme_bw(base_family = "AppleGothic") +
     labs(x="", y="",
-         title="성별, 비만구분에 따른 키와 몸무게")
+         title="Height and Weight") 
+         # title="성별, 비만구분에 따른 키와 몸무게") 
 ```
 
 
